@@ -14,7 +14,7 @@ except:
 
 app = Flask(__name__)
 
-df = pd.read_csv(r"C:\Users\aarya\OneDrive\Desktop\Car_Project\car_seats_filled.csv")
+df = pd.read_csv("car_seats_filled.csv")
 
 model = pickle.load(open('xgboost.pkl','rb'))
 columns = pickle.load(open('columns.pkl','rb'))
