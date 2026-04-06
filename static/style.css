@@ -314,3 +314,82 @@ hr{
 .box1 button:hover{
     background-color: rgb(28, 169, 159);
 }
+
+
+/* 📱 MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+
+    /* Header */
+    header h1 {
+        font-size: 28px !important;
+        text-align: center;
+    }
+
+    header h2 {
+        font-size: 16px !important;
+        text-align: center;
+    }
+
+    /* Stack layout vertically */
+    .side {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .box1, .box2 {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* Forms */
+    .only-flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .select-box {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* Sliders */
+    input[type="range"] {
+        width: 100%;
+    }
+
+    /* Car details */
+    .box3 .only-flex {
+        flex-direction: column;
+    }
+
+    .engine, .milage, .max_power {
+        margin: 10px 0 !important;
+    }
+
+    /* Recommendation cards */
+    .rec-cars {
+        display: grid;
+        grid-template-columns: 1fr;  /* 1 card per row */
+        gap: 15px;
+    }
+
+    .cards {
+        width: 100%;
+    }
+
+    /* Image fix */
+    .recommended-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Price button */
+    .box4 button {
+        width: 100%;
+    }
+}
