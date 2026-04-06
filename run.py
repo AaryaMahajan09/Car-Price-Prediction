@@ -7,7 +7,10 @@ import pickle
 import locale
 import os
 
-locale.setlocale(locale.LC_ALL, 'en_IN')
+try:
+    locale.setlocale(locale.LC_ALL, '')
+except:
+    pass
 
 app = Flask(__name__)
 
