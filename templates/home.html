@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"rel="stylesheet"/>
+    <title>Car Prediction</title>
+</head>
+<body>
+    <header>
+        
+        <div class="logo"><img src="{{url_for('static', filename='carpic.png')}}" alt=""></div>
+        <h1 style="font-size: 60px;">Car Price Prediction</h1>
+        <h2 style="font-size: 25px;">Predict car prices and discover similar cars</h2>
+    </header>
+
+    <main>
+        <div class="side">
+            <div class="box1">
+                <div class="only-flex">
+                    <div class="speedometer"><i class="ri-dashboard-2-line"></i></div>
+                
+                    <h3 style="padding-top: 30px; font-size: xx-large;">Car Selection</h3>
+                </div>
+
+                <form method="POST" id="inputform">
+                    <div class="only-flex">
+                        <div class="select-box">
+                            <label for="brand">Brand</label><br>
+                            <select name="brand" required>
+                                <option value="">Select Brand</option>
+
+                                {% for brand in brands %}
+                                <option value="{{brand}}" {% if brand == selected_brand %}selected{% endif %}>
+                                    {{brand}}
+                                </option>
+
+                                {% endfor %}
+                                
+                            </select>
+                        </div>
+
+                        
+                        <button type="submit" name="action" value="search">Search Models</button>
+
+                        <div class="select-box">
+                            <label for="model">Model</label><br>
+                            <select name="model">
+
+                                <option value="">Select Model</option>
+
+                                {% for model in models %}
+                                <option value="{{model}}" {% if model == selected_model %}selected{% endif %}>
+                                    {{model}}
+                                </option>
+                                {% endfor %}
+                                                                
+                            </select>
+                        </div>
+                        
+
+                    </div>
+
+                    <div class="year">
+                        <div class="only-flex">
+                            <label for="year" style="margin-right: 67%;">Year</label>
+
+                            <span id="yearValue" class="yearValue">{{selected_year or 2020}}</span>
+                        </div>
+
+                        <input type="range" name="year" id="year" min="2005" max="2024" value="{{selected_year or 2020}}" oninput="yearValue.innerText = this.value">
+                        <div class="range-label">
+                            <span style="margin-right: 50%;">2005</span>
+                            <span style="margin-left: 22%;">2024</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="kilometer">
+                        <div class="only-flex">
+                            <label for="kilometer" style="margin-right: 62%;">Kilometer</label>
+
+                            <span id="kilometerValue" class="kilometerValue">{{selected_km or 30000}}</span>
+                        </div>
+
+                        <input type="range" name="kilometer" id="kilometer min="0" max="200000" value="{{selected_km or 30000}}" oninput="kilometerValue.innerText = this.value">
+                        <div class="range-label">
+                            <span style="margin-right: 50%;">0</span>
+                            <span style="margin-left: 22%;">200000</span>
+                        </div>
+                    </div>
+
+                    <div class="only-flex">
+                        <div class="select-box">
+                            <label for="fuel">Fuel</label><br>
+                            <select name="fuel">
+
+                                <option value="">Select Fuel</option>
+
+                                {% for fuel in fuels %}
+                                <option value="{{fuel}}" {% if fuel == selected_fuel %}selected{% endif %}>
+                                    {{fuel}}
+                                </option>
+                                {% endfor %}
+                                                                
+                            </select>
+                        </div>
+
+                        <div class="select-box">
+                            <label for="transmission">Transmission</label><br>
+                            <select name="transmission">
+
+                                <option value="">Select Transmission</option>
+
+                                {% for transmission in transmissions %}
+                                <option value="{{transmission}}" {% if transmission == selected_transmission %}selected{% endif %}>
+                                    {{transmission}}
+                                </option>
+                                {% endfor %}
+                                                                
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+
+
+
+            <div class="box2">
+                
+                <div class="only-flex">
+                    <i class="ri-bard-line" style="font-size: 40px; padding: 25px; padding-top: 45px; color: rgb(28, 169, 159); padding-right: 10px;"></i>
+                
+                    <h3 style="padding-top: 50px; font-size: 30px;">Preview Image</h3>
+                </div>
+
+                {% if price %}
+
+                <div class="preview-image">
+                    {% if image_file %}
+                    <img src="{{ url_for('static', filename=image_file) }}" width="100%">
+                    {% else %}
+                    <p>No image available</p>
+                    {% endif %}
+                </div>
+
+                <div class="only-flex">
+                    <i class="ri-money-rupee-circle-line" style="font-size: 40px; padding: 25px; padding-top: 45px; color: rgb(28, 169, 159); padding-right: 10px;"></i>
+                    <h3 style="padding-top: 50px; font-size: 30px;">Predicted Price</h3>
+                </div>
+
+                <p>Estimated Price</p>
+                <h1 style="font-size: 40px;">₹ {{price}}</h1>
+                <p style="padding-top: 20px;">*Based on current market trends</p>
+            {% endif %}
+            </div>            
+        </div>
+
+
+        <div class="box3">
+            <div class="only-flex">
+                <div class="stars"><i class="ri-bard-line"></i></div>
+                <h3 style="padding-top: 25px;">Car Details</h3>
+            </div>
+
+            <div class="only-flex">
+                <div class="engine">
+                    <div class="only-flex">
+                        <div class="emoji"><i class="ri-dashboard-2-line"></i></div>
+                        <h4 style="padding: 25px; padding-left: 0%;">Engine</h4>
+                    </div>
+                    <div class="info">{{engine}} CC</div>
+                </div>
+
+                <div class="milage" style="margin-left: 50px;">
+                    <div class="only-flex">
+                        <div class="emoji"><i class="ri-gas-station-line"></i></div>
+                        <h4 style="padding: 25px; padding-left: 0%;">Milage</h4>
+                    </div>
+                    <div class="info">{{mileage}} kmpl</div>
+                </div>
+
+                <div class="max_power" style="margin-left: 50px;">
+                    <div class="only-flex">
+                        <div class="emoji"><i class="ri-flashlight-line"></i></i></div>
+                        <h4 style="padding: 25px; padding-left: 0%;">Max Power</h4>
+                    </div>
+                    <div class="info">{{max_power}} bhp</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box4"><button type="submit" form="inputform" name="action" value="predict">Predict Price</button></div>
+        <div class="box5"></div>
+
+        
+
+        {% if recommendations is not none and not recommendations.empty %}
+        
+        <h1>Similar Cars You Might Like</h1>
+
+        <div class="recommendations">
+
+            <div class="rec-cars">
+
+                {% for car in recommendations.itertuples() %}
+                <div class="cards">
+                    <div class="flex-card">
+                        <div class="recommended-image">
+                            {% if car.image %}
+                            <img src="{{ url_for('static', filename=car.image) }}" width="100%">
+                            {% else %}
+                            <p>No image</p>
+                            <p style="font-size: 12px; color: gray;">
+                                Expected: {{ car.expected_image }}
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="car-info">
+                        <h3>{{car.name}}</h3>
+                        <div class="only-flex">
+                            <div class="rec-info">
+                                <div class="rec-img"><i class="ri-gas-station-line" ></i></div>
+                                <p>{{car.fuel}}</p>
+                            </div>
+                            <div class="rec-info">
+                                
+                                <div class="rec-img"><i class="ri-settings-3-line"></i></div>
+                                <p>{{car.transmission}}</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <p style="margin-left: 25px; margin-top: 5px;">Selling Price</p>
+                        <div class="rec-price"><h3>₹{{car.selling_price}}</h3></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="box5"></div>
+
+        </div>
+        {% endif %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+#carenvir10 //envir name
+
+ipykernel
+pandas
+numpy
+Scikit-learn
+matplotlib
+
+opencv-python
+pillow
