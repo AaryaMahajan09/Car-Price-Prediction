@@ -74,7 +74,7 @@ pip install -r requirements.txt
 ### 3️⃣ Run the app
 
 ```bash
-python app.py
+python run.py
 ```
 
 ### 4️⃣ Open in browser
@@ -102,10 +102,8 @@ http://127.0.0.1:5000/
 
 ## 🎯 Future Improvements
 
-* Deploy on cloud (Render / Railway)
 * Add better UI/UX
 * Improve model accuracy
-* Add car recommendations feature
 
 ---
 
