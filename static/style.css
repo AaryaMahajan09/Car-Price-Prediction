@@ -2,6 +2,7 @@
     margin: 0%;
     padding: 0%;
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
 }
 html,body{
     height: 100%;
@@ -10,15 +11,10 @@ html,body{
 }
 
 header{
-    height: 20%;
-    width: 100%;
-    
+    padding: 20px 10px 10px;
 }
 
-
-
 .logo{
-    height: 55%;
     display: flex;
     justify-content: center;
 }
@@ -34,6 +30,7 @@ header{
 h1{
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 h2{
@@ -42,6 +39,7 @@ h2{
     opacity: 0.5;
     font-weight: lighter;
     font-size: larger;
+    text-align: center;
 }
 
 main{
@@ -106,6 +104,7 @@ main{
     font-weight: bold;
     font-size: large;
     border: 0;
+    cursor: pointer;
 }
 
 .box4 button:hover{
@@ -114,6 +113,7 @@ main{
 
 .box5{
     height: 10%;
+    min-height: 30px;
 }
 
 .recommendations{
@@ -125,7 +125,6 @@ main{
     display: flex;
     height: 100%;
     width: 100%;
-
 }
 
 .cards{
@@ -177,7 +176,6 @@ select{
 :in-range{
     width: 80%;
     margin-top: 20px;
-
 }
 
 .yearValue{
@@ -216,7 +214,6 @@ select{
 }
 
 .emoji{
-    
     padding: 20px;
     padding-right: 5px;
     margin-left: 5px;
@@ -238,7 +235,7 @@ select{
 
 .preview-image{
     width: 90%;
-    height:fit-content;
+    height: fit-content;
     margin: 20px;
 }
 
@@ -249,10 +246,9 @@ select{
     color: gray;
 }
 
-
 .recommended-image{
     width: 95%;
-    height:fit-content;
+    height: fit-content;
     margin-top: 10px;
 }
 
@@ -300,7 +296,6 @@ hr{
     margin: 5px;
 }
 
-
 .box1 button{
     width: 150px;
     height: 40px;
@@ -309,87 +304,318 @@ hr{
     border: 0;
     background-color: rgb(22, 150, 142);
     color: white;
+    cursor: pointer;
 }
 
 .box1 button:hover{
     background-color: rgb(28, 169, 159);
 }
 
-
-/* 📱 MOBILE RESPONSIVENESS */
+/* ==============================
+   📱 MOBILE RESPONSIVENESS
+   ============================== */
 @media (max-width: 768px) {
 
     /* Header */
+    header {
+        padding: 15px 15px 5px;
+    }
+
     header h1 {
         font-size: 28px !important;
         text-align: center;
+        padding: 0 10px;
     }
 
     header h2 {
-        font-size: 16px !important;
+        font-size: 14px !important;
         text-align: center;
+        padding: 5px 10px 10px;
     }
 
-    /* Stack layout vertically */
+    main {
+        padding: 0;
+    }
+
+    /* Stack side layout vertically */
     .side {
         flex-direction: column;
         width: 100%;
+        margin: 0;
+        padding: 10px;
     }
 
-    .box1, .box2 {
+    .box1 {
         width: 100%;
-        margin: 10px 0;
+        margin: 0 0 15px 0;
+        border-radius: 20px;
+        padding-bottom: 15px;
     }
 
-    /* Forms */
-    .only-flex {
+    .box2 {
+        width: 100%;
+        height: auto;
+        margin: 0 0 15px 0;
+        border-radius: 20px;
+    }
+
+    /* Box 2 predicted price text alignment */
+    .box2 p {
+        padding-top: 25px;
+    }
+
+    /* Form layout inside box1 */
+    .box1 .only-flex {
         flex-direction: column;
         align-items: stretch;
     }
 
+    /* Brand + model row: keep them side by side on mobile */
+    .box1 > form > .only-flex:first-child {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 10px;
+        padding: 10px 15px 0;
+    }
+
     .select-box {
-        width: 100%;
-        margin-bottom: 10px;
+        padding: 10px 15px;
+        margin-right: 0;
+        flex: 1 1 40%;
     }
 
-    button {
+    select {
         width: 100%;
-        margin: 10px 0;
+        min-width: 0;
     }
 
-    /* Sliders */
+    /* Search Models button */
+    .box1 button {
+        width: auto;
+        min-width: 120px;
+        height: 40px;
+        margin-top: 28px;
+        align-self: flex-end;
+        flex-shrink: 0;
+    }
+
+    /* Year slider */
+    .year {
+        padding: 15px;
+    }
+
+    .year .only-flex {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .year label {
+        margin-right: 0 !important;
+    }
+
     input[type="range"] {
         width: 100%;
+        margin-top: 8px;
     }
 
-    /* Car details */
+    .range-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: gray;
+        margin-top: 4px;
+    }
+
+    /* Kilometer slider */
+    .kilometer {
+        padding: 15px;
+        padding-top: 5px;
+    }
+
+    .kilometer .only-flex {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .kilometer label {
+        margin-right: 0 !important;
+    }
+
+    /* Fuel + Transmission row — side by side */
+    .box1 form > .only-flex:last-child {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        padding: 10px 15px;
+    }
+
+    .box1 form > .only-flex:last-child .select-box {
+        flex: 1 1 45%;
+        padding: 10px 5px;
+    }
+
+    /* Box3 - Car Details */
+    .box3 {
+        width: calc(100% - 20px);
+        height: auto;
+        margin: 10px;
+        border-radius: 20px;
+        padding-bottom: 15px;
+    }
+
     .box3 .only-flex {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
     }
 
     .engine, .milage, .max_power {
-        margin: 10px 0 !important;
+        margin: 0 !important;
+        flex: 1 1 30%;
+        min-width: 90px;
     }
 
-    /* Recommendation cards */
+    .info {
+        padding: 10px;
+        padding-right: 10px;
+        width: 100%;
+        font-size: 13px;
+    }
+
+    /* Predict Price button */
+    .box4 {
+        width: calc(100% - 20px);
+        margin: 10px;
+        height: 55px;
+        border-radius: 16px;
+    }
+
+    .box4 button {
+        border-radius: 16px;
+        font-size: 16px;
+    }
+
+    /* Recommendations heading */
+    main > h1 {
+        font-size: 20px !important;
+        padding: 10px 15px 5px;
+        text-align: center;
+    }
+
+    /* Recommendation cards — single column scroll */
+    .recommendations {
+        height: auto;
+        padding: 0 10px;
+    }
+
     .rec-cars {
-        display: grid;
-        grid-template-columns: 1fr;  /* 1 card per row */
+        display: flex;
+        flex-direction: column;
         gap: 15px;
+        padding-bottom: 10px;
     }
 
     .cards {
         width: 100%;
+        height: auto;
+        border-radius: 16px;
     }
 
-    /* Image fix */
-    .recommended-image img {
-        width: 100%;
+    .flex-card {
         height: auto;
     }
 
-    /* Price button */
-    .box4 button {
+    .recommended-image {
+        width: 100%;
+        margin: 0;
+        border-radius: 16px 16px 0 0;
+        overflow: hidden;
+    }
+
+    .recommended-image img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .car-info h3 {
+        padding: 12px 15px 8px;
+        font-size: 15px;
+    }
+
+    .car-info .only-flex {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-bottom: 8px;
+    }
+
+    .rec-info {
+        margin-left: 12px;
+        font-size: 13px;
+    }
+
+    hr {
+        margin-top: 10px;
+        width: 90%;
+        margin-left: 12px;
+    }
+
+    .car-info p {
+        margin-left: 15px !important;
+        margin-top: 8px;
+        font-size: 13px;
+    }
+
+    .rec-price h3 {
+        padding: 4px 0;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    /* Preview image in box2 */
+    .preview-image {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .preview-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    /* Icon sizes */
+    .speedometer i {
+        font-size: 35px;
+    }
+
+    .emoji i {
+        font-size: 20px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 380px) {
+    header h1 {
+        font-size: 22px !important;
+    }
+
+    .engine, .milage, .max_power {
+        flex: 1 1 100%;
+    }
+
+    .box1 form > .only-flex:first-child {
+        flex-direction: column;
+    }
+
+    .box1 button {
+        margin-top: 5px;
         width: 100%;
     }
 }
